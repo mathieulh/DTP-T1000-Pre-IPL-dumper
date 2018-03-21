@@ -13,7 +13,6 @@ http://www.psdevwiki.com/ps3/Communication_Processor
 
 How to: 
 
-Install the 5.00 or higher hardward tool update OR perform a system init on your device (hold the system init button while pressing the power button and wait)
 
 Extract the archive on your DTP-T1000/DEM-1000 (using /tmp is preferable due to the extra space available on this partition) 
 

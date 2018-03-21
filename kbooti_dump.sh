@@ -5,7 +5,9 @@ Version=/var/lib/toolupdate/toolupdate.version
 rm -f kbootitmp
 rm -f kbootidmp.bin
 rm *.tmp
-if grep '1.0.0' $Version;then
+#if grep '1.5.0' $Version;then
+if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
+
 
 #CP Version 1.00
 
@@ -96,7 +98,7 @@ fi
 
 rm *.tmp
 
-if grep '5.00' $Version;then
+if [ -f /usr/local/sony/bin/bootdispi/dsbloadp ]; then
 #CP Version 5.00
 
 
