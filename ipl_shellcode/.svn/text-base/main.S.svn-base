@@ -1,0 +1,54 @@
+	.set noreorder
+	.global start
+	.ent    start
+#entrypoint is 0x40E0000
+start:
+#copy reset vector
+    li     $t0, 0xBFC00000   #boot vector
+#    li      $t0, 0xa0010000 #referenced in boot vector (code is copied to this addr by boot vector)
+    addiu   $t3, $t0, 0x1000 #don't go over 0x1000 bytes at a time
+    li      $t1, 0x440EF000
+loop:
+    lw      $t2, 0($t0)
+    sw      $t2, 0($t1)
+    addiu   $t0, 4
+    bne     $t3, $t0, loop
+    addiu   $t1, 4
+
+    li      $t0, 0x440F00EC #1.50 ipl jump to main.gz location
+
+    la      $t1, patch2 #MIPS_J(patch2)
+    li      $t2, 0x0ffffffc
+    and     $t1, $t1, $t2
+    srl     $t1, 2
+    li      $t2, 0x08000000
+    addu    $t1, $t1, $t2
+
+    sw      $t1, 0($t0) #overwrite ins
+
+#run original ins
+   lui      $8,  0xbc10
+   lw       $9,  0x50($8)
+   jr       $ra
+   nop
+
+#running right before main.gz jump
+patch2:
+#copy reset vector to kmem
+#stored at 0x883f0000 (not overwritten in 1.5)
+    li      $t0, 0x440EF000
+    addiu   $t3, $t0, 0x1000
+    lui     $t1, 0x483F
+copy_loop2:
+    lw      $t2, 0($t0)
+    sw      $t2, 0($t1)
+    addiu   $t0, 4
+    bne     $t3, $t0, copy_loop2
+    addiu   $t1, 4
+
+    lui     $25, 0x0400
+    li      $29, 0x40fff00
+    jr      $25
+    nop
+   .end start
+	.set reorder
