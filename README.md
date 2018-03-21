@@ -31,7 +31,7 @@ copy respective kbooti/bootdispi from the SDK in the folder containing the scrip
 
 "kbooti_260.bin" (for SDK 2.6.0)
 
-"kbooti_271.bin" (for SDK 2.6.0)
+"kbooti_271.bin" (for SDK 2.^7.0)
 
 run the kbooti_dump.sh script.
 
