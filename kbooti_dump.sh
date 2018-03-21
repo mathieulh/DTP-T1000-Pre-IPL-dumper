@@ -6,7 +6,6 @@ rm -f kbootitmp
 rm -f kbootidmp.bin
 rm *.tmp
 if grep '1.0.0' $Version;then
-#bootdispi='/usr/local/sony/bin/bootdispi'
 
 #CP Version 1.00
 
@@ -16,7 +15,6 @@ dd if=kbooti_040.bin bs=1 count=4096 of=kbootitmp
 cat kbootitmp ipl_0xbfc.bin > kbootidmp.bin
 rm -f kbootitmp
 /usr/local/sony/bin/bootdispi/dstdb -nokbd -Force bloadp kbootidmp.bin
-#/usr/local/sony/bin/bootdispi/dspreset
 nohup /usr/local/sony/bin/bootdispi/dspreset &>/dev/null &
 sleep 10
 pkill dspreset
