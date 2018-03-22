@@ -1,6 +1,6 @@
 #!/bin/sh
 
-Version=/var/lib/toolupdate/toolupdate.version
+#Version=/var/lib/toolupdate/toolupdate.version
 
 rm -f *.tmp
 #if grep '1.5.0' $Version;then
