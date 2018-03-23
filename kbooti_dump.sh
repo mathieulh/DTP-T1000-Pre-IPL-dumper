@@ -7,7 +7,6 @@ rm -f *.tmp
 #if grep '1.5.0' $Version;then
 
 
-#CP Version 1.00
 
 #0.4.0
 #check if the kbooti file exists
