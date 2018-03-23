@@ -2,23 +2,41 @@
 
 #Version=/var/lib/toolupdate/toolupdate.version
 
+#delete all temporary files
 rm -f *.tmp
 #if grep '1.5.0' $Version;then
-if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
 
 
 #CP Version 1.00
 
 #0.4.0
+#check if the kbooti file exists
 if [ -f kbooti_040.bin ]; then
+#create a temporary file only containing the first 0x1000 of the kbooti
 dd if=kbooti_040.bin bs=1 count=4096 of=kbooti.tmp
+#appends the IPL containing the dumper payload to the temporary kbooti
 cat kbooti.tmp ipl_0xbfc.bin > kbootidmp.tmp
+#check if the current CP version contains the dstdb binary, if not use bloadp instead
+if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
+#write the kbooti+IPL to 0x1D600000 using dstdb's bloadp command
 /usr/local/sony/bin/bootdispi/dstdb -nokbd -Force bloadp kbootidmp.tmp
+#write the kbooti+IPL to 0x1D600000 using bloadp if dstdb is not present
+elif [ -f /usr/local/sony/bin/bootdispi/dsbloadp ]; then
+/usr/local/sony/bin/bootdispi/dsbloadp kbootidmp.tmp
+#If neither dstdb or bloadp binaries are present notify the user of an unsupported CP version
+else echo "Unsupported CP Version!"
+fi
+#reset tachyon
 nohup /usr/local/sony/bin/bootdispi/dspreset &>/dev/null &
+#wait 10 seconds for the payload to run properly before killing dspreset
 sleep 10
+#tachyon crashes and does not return a proper reset value so dspreset is stuck in a waiting loop, thus we kill dspreset manually
 pkill dspreset
+#read address 0x1D650000 where our payload has written the dump. (0xBFE50000 on tachyon)
 ./dump_cp_addr.elf 0x1D650000 0x1000 > "Lib-PSP iplloader0.4.0.bin.tmp"
+#create the final file after removing the excess memory data from the dump
 dd if="Lib-PSP iplloader0.4.0.bin.tmp" bs=1 count=1472 of="Lib-PSP iplloader0.4.0.bin"
+#delete all temporary files
 rm -f *.tmp
 fi
 
@@ -26,7 +44,12 @@ fi
 if [ -f kbooti_060.bin ]; then
 dd if=kbooti_060.bin bs=1 count=4096 of=kbooti.tmp
 cat kbooti.tmp ipl_0xbfc.bin > kbootidmp.tmp
+if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
 /usr/local/sony/bin/bootdispi/dstdb -nokbd -Force bloadp kbootidmp.tmp
+elif [ -f /usr/local/sony/bin/bootdispi/dsbloadp ]; then
+/usr/local/sony/bin/bootdispi/dsbloadp kbootidmp.tmp
+else echo "Unsupported CP Version!"
+fi
 nohup /usr/local/sony/bin/bootdispi/dspreset &>/dev/null &
 sleep 10
 pkill dspreset
@@ -39,20 +62,30 @@ fi
 if [ -f kbooti_070.bin ]; then
 dd if=kbooti_070.bin bs=1 count=4096 of=kbooti.tmp
 cat kbooti.tmp ipl_0x8001.bin > kbootidmp.tmp
+if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
 /usr/local/sony/bin/bootdispi/dstdb -nokbd -Force bloadp kbootidmp.tmp
+elif [ -f /usr/local/sony/bin/bootdispi/dsbloadp ]; then
+/usr/local/sony/bin/bootdispi/dsbloadp kbootidmp.tmp
+else echo "Unsupported CP Version!"
+fi
 nohup /usr/local/sony/bin/bootdispi/dspreset &>/dev/null &
 sleep 10
 pkill dspreset
 ./dump_cp_addr.elf 0x1D650000 0x1000 > "Lib-PSP iplloader0.7.0_0x80010000.bin.tmp"
 dd if="Lib-PSP iplloader0.7.0_0x80010000.bin.tmp" bs=1 count=2196 of="Lib-PSP iplloader0.7.0_0x80010000.bin"
-rm -f *.tmp
+rm -f *.tmp #deletes all temporary files
 fi
 
 #0.9.0
 if [ -f kbooti_090.bin ]; then
 dd if=kbooti_090.bin bs=1 count=4096 of=kbooti.tmp
 cat kbooti.tmp ipl_0x8001.bin > kbootidmp.tmp
+if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
 /usr/local/sony/bin/bootdispi/dstdb -nokbd -Force bloadp kbootidmp.tmp
+elif [ -f /usr/local/sony/bin/bootdispi/dsbloadp ]; then
+/usr/local/sony/bin/bootdispi/dsbloadp kbootidmp.tmp
+else echo "Unsupported CP Version!"
+fi
 nohup /usr/local/sony/bin/bootdispi/dspreset &>/dev/null &
 sleep 10
 pkill dspreset
@@ -65,7 +98,12 @@ fi
 if [ -f kbooti_260.bin ]; then
 dd if=kbooti_260.bin bs=1 count=4096 of=kbooti.tmp
 cat kbooti.tmp ipl_0x8001.bin > kbootidmp.tmp
+if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
 /usr/local/sony/bin/bootdispi/dstdb -nokbd -Force bloadp kbootidmp.tmp
+elif [ -f /usr/local/sony/bin/bootdispi/dsbloadp ]; then
+/usr/local/sony/bin/bootdispi/dsbloadp kbootidmp.tmp
+else echo "Unsupported CP Version!"
+fi
 nohup /usr/local/sony/bin/bootdispi/dspreset &>/dev/null &
 sleep 10
 pkill dspreset
@@ -78,7 +116,12 @@ fi
 if [ -f kbooti_271.bin ]; then
 dd if=kbooti_271.bin bs=1 count=4096 of=kbooti.tmp
 cat kbooti.tmp ipl_0x8001.bin > kbootidmp.tmp
+if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
 /usr/local/sony/bin/bootdispi/dstdb -nokbd -Force bloadp kbootidmp.tmp
+elif [ -f /usr/local/sony/bin/bootdispi/dsbloadp ]; then
+/usr/local/sony/bin/bootdispi/dsbloadp kbootidmp.tmp
+else echo "Unsupported CP Version!"
+fi
 nohup /usr/local/sony/bin/bootdispi/dspreset &>/dev/null &
 sleep 10
 pkill dspreset
@@ -86,90 +129,5 @@ pkill dspreset
 dd if="Lib-PSP iplloader2.7.1_0x80010000.bin.tmp" bs=1 count=3060 of="Lib-PSP iplloader2.7.1_0x80010000.bin"
 rm -f *.tmp
 fi
-fi
 
-rm *.tmp
-
-if [ -f /usr/local/sony/bin/bootdispi/dsbloadp ]; then
-#CP Version 5.00
-
-
-#0.4.0
-if [ -f kbooti_040.bin ]; then
-dd if=kbooti_040.bin bs=1 count=4096 of=kbooti.tmp
-cat kbooti.tmp ipl_0xbfc.bin > kbootidmp.tmp
-/usr/local/sony/bin/bootdispi/dsbloadp kbootidmp.tmp
-nohup /usr/local/sony/bin/bootdispi/dspreset -nowait &>/dev/null &
-pkill dspreset
-sleep 5
-./dump_cp_addr.elf 0x1D650000 0x1000 > "Lib-PSP iplloader0.4.0.bin.tmp"
-dd if="Lib-PSP iplloader0.4.0.bin.tmp" bs=1 count=1472 of="Lib-PSP iplloader0.4.0.bin"
 rm -f *.tmp
-fi
-
-#0.6.0
-if [ -f kbooti_060.bin ]; then
-dd if=kbooti_060.bin bs=1 count=4096 of=kbooti.tmp
-cat kbooti.tmp ipl_0xbfc.bin > kbootidmp.tmp
-/usr/local/sony/bin/bootdispi/dsbloadp kbootidmp.tmp
-nohup /usr/local/sony/bin/bootdispi/dspreset -nowait &>/dev/null &
-pkill dspreset
-sleep 5
-./dump_cp_addr.elf 0x1D650000 0x1000 > "Lib-PSP iplloader0.6.0.bin.tmp"
-dd if="Lib-PSP iplloader0.6.0.bin.tmp" bs=1 count=1872 of="Lib-PSP iplloader0.6.0.bin"
-rm -f *.tmp
-fi
-
-#0.7.0
-if [ -f kbooti_070.bin ]; then
-dd if=kbooti_070.bin bs=1 count=4096 of=kbooti.tmp
-cat kbooti.tmp ipl_0x8001.bin > kbootidmp.tmp
-/usr/local/sony/bin/bootdispi/dsbloadp kbootidmp.tmp
-nohup /usr/local/sony/bin/bootdispi/dspreset -nowait &>/dev/null &
-pkill dspreset
-sleep 5
-./dump_cp_addr.elf 0x1D650000 0x1000 > "Lib-PSP iplloader0.7.0_0x80010000.bin.tmp"
-dd if="Lib-PSP iplloader0.7.0_0x80010000.bin.tmp" bs=1 count=2196 of="Lib-PSP iplloader0.7.0_0x80010000.bin"
-rm -f *.tmp
-fi
-
-#0.9.0
-if [ -f kbooti_090.bin ]; then
-dd if=kbooti_090.bin bs=1 count=4096 of=kbooti.tmp
-cat kbooti.tmp ipl_0x8001.bin > kbootidmp.tmp
-/usr/local/sony/bin/bootdispi/dsbloadp kbootidmp.tmp
-nohup /usr/local/sony/bin/bootdispi/dspreset -nowait &>/dev/null &
-pkill dspreset
-sleep 5
-./dump_cp_addr.elf 0x1D650000 0x1000 > "Lib-PSP iplloader0.9.0_0x80010000.bin.tmp"
-dd if="Lib-PSP iplloader0.9.0_0x80010000.bin.tmp" bs=1 count=2196 of="Lib-PSP iplloader0.9.0_0x80010000.bin"
-rm -f *.tmp
-fi
-
-#2.6.0
-if [ -f kbooti_260.bin ]; then
-dd if=kbooti_260.bin bs=1 count=4096 of=kbooti.tmp
-cat kbooti.tmp ipl_0x8001.bin > kbootidmp.tmp
-/usr/local/sony/bin/bootdispi/dsbloadp kbootidmp.tmp
-nohup /usr/local/sony/bin/bootdispi/dspreset -nowait &>/dev/null &
-pkill dspreset
-sleep 5
-./dump_cp_addr.elf 0x1D650000 0x1000 > "Lib-PSP iplloader2.6.0_0x80010000.bin.tmp"
-dd if="Lib-PSP iplloader2.6.0_0x80010000.bin.tmp" bs=1 count=3060 of="Lib-PSP iplloader2.6.0_0x80010000.bin"
-rm -f *.tmp
-fi
-
-#2.7.1
-if [ -f kbooti_271.bin ]; then
-dd if=kbooti_271.bin bs=1 count=4096 of=kbooti.tmp
-cat kbooti.tmp ipl_0x8001.bin > kbootidmp.tmp
-/usr/local/sony/bin/bootdispi/dsbloadp kbootidmp.tmp
-nohup /usr/local/sony/bin/bootdispi/dspreset -nowait &>/dev/null &
-pkill dspreset
-sleep 5
-./dump_cp_addr.elf 0x1D650000 0x1000 > "Lib-PSP iplloader2.7.1_0x80010000.bin.tmp"
-dd if="Lib-PSP iplloader2.7.1_0x80010000.bin.tmp" bs=1 count=3060 of="Lib-PSP iplloader2.7.1_0x80010000.bin"
-rm -f *.tmp
-fi
-
-fi
