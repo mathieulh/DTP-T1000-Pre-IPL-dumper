@@ -1,7 +1,7 @@
 	.set noreorder
 	.global start
 	.ent    start
-#entrypoint is 0x40E0000
+#entrypoint is 0x40F0000
 start:
 #copy reset vector
     li     $t0, 0xBFC00000   #boot vector
