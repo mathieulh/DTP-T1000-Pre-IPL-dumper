@@ -62,7 +62,7 @@ fi
 
 #0.7.0
 if [ -f kbooti_070.bin ]; then
-cat 0xBFE01100r.bin 0x8001.bin > ipl_0x8001.bin.tmp
+cat 0xBFC00100r.bin 0x8001.bin > ipl_0x8001.bin.tmp
 dd if=kbooti_070.bin bs=1 count=4096 of=kbooti.tmp
 cat kbooti.tmp ipl_0x8001.bin.tmp > kbootidmp.tmp
 if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
@@ -81,7 +81,7 @@ fi
 
 #0.9.0
 if [ -f kbooti_090.bin ]; then
-cat 0xBFE01100r.bin 0x8001.bin > ipl_0x8001.bin.tmp
+cat 0xBFC00100r.bin 0x8001.bin > ipl_0x8001.bin.tmp
 dd if=kbooti_090.bin bs=1 count=4096 of=kbooti.tmp
 cat kbooti.tmp ipl_0x8001.bin.tmp > kbootidmp.tmp
 if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
@@ -100,7 +100,7 @@ fi
 
 #2.6.0
 if [ -f kbooti_260.bin ]; then
-cat 0xBFE01100r.bin 0x8001.bin > ipl_0x8001.bin.tmp
+cat 0xBFC00100r.bin 0x8001.bin > ipl_0x8001.bin.tmp
 dd if=kbooti_260.bin bs=1 count=4096 of=kbooti.tmp
 cat kbooti.tmp ipl_0x8001.bin.tmp > kbootidmp.tmp
 if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
@@ -119,7 +119,7 @@ fi
 
 #2.7.1
 if [ -f kbooti_271.bin ]; then
-cat 0xBFE01100r.bin 0x8001.bin > ipl_0x8001.bin.tmp
+cat 0xBFC00100r.bin 0x8001.bin > ipl_0x8001.bin.tmp
 dd if=kbooti_271.bin bs=1 count=4096 of=kbooti.tmp
 cat kbooti.tmp ipl_0x8001.bin.tmp > kbootidmp.tmp
 if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
