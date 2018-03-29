@@ -11,10 +11,12 @@ rm -f *.tmp
 #0.4.0
 #check if the kbooti file exists
 if [ -f kbooti_040.bin ]; then
+#appends the dumper payload to the IPL block
+cat jr_0xbfe01100.bin 0xbfc.bin > ipl_0xbfc.bin.tmp
 #create a temporary file only containing the first 0x1000 of the kbooti
 dd if=kbooti_040.bin bs=1 count=4096 of=kbooti.tmp
-#appends the IPL containing the dumper payload to the temporary kbooti
-cat kbooti.tmp ipl_0xbfc.bin > kbootidmp.tmp
+#appends the IPL containing the crafted IPL to the temporary kbooti
+cat kbooti.tmp ipl_0xbfc.bin.tmp > kbootidmp.tmp
 #check if the current CP version contains the dstdb binary, if not use bloadp instead
 if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
 #write the kbooti+IPL to 0x1D600000 using dstdb's bloadp command
@@ -41,8 +43,9 @@ fi
 
 #0.6.0
 if [ -f kbooti_060.bin ]; then
+cat jr_0xbfe01100.bin 0xbfc.bin > ipl_0xbfc.bin.tmp
 dd if=kbooti_060.bin bs=1 count=4096 of=kbooti.tmp
-cat kbooti.tmp ipl_0xbfc.bin > kbootidmp.tmp
+cat kbooti.tmp ipl_0xbfc.bin.tmp > kbootidmp.tmp
 if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
 /usr/local/sony/bin/bootdispi/dstdb -nokbd -Force bloadp kbootidmp.tmp
 elif [ -f /usr/local/sony/bin/bootdispi/dsbloadp ]; then
@@ -59,8 +62,9 @@ fi
 
 #0.7.0
 if [ -f kbooti_070.bin ]; then
+cat 0xBFE01100r.bin 0x8001.bin > ipl_0x8001.bin.tmp
 dd if=kbooti_070.bin bs=1 count=4096 of=kbooti.tmp
-cat kbooti.tmp ipl_0x8001.bin > kbootidmp.tmp
+cat kbooti.tmp ipl_0x8001.bin.tmp > kbootidmp.tmp
 if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
 /usr/local/sony/bin/bootdispi/dstdb -nokbd -Force bloadp kbootidmp.tmp
 elif [ -f /usr/local/sony/bin/bootdispi/dsbloadp ]; then
@@ -77,8 +81,9 @@ fi
 
 #0.9.0
 if [ -f kbooti_090.bin ]; then
+cat 0xBFE01100r.bin 0x8001.bin > ipl_0x8001.bin.tmp
 dd if=kbooti_090.bin bs=1 count=4096 of=kbooti.tmp
-cat kbooti.tmp ipl_0x8001.bin > kbootidmp.tmp
+cat kbooti.tmp ipl_0x8001.bin.tmp > kbootidmp.tmp
 if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
 /usr/local/sony/bin/bootdispi/dstdb -nokbd -Force bloadp kbootidmp.tmp
 elif [ -f /usr/local/sony/bin/bootdispi/dsbloadp ]; then
@@ -95,8 +100,9 @@ fi
 
 #2.6.0
 if [ -f kbooti_260.bin ]; then
+cat 0xBFE01100r.bin 0x8001.bin > ipl_0x8001.bin.tmp
 dd if=kbooti_260.bin bs=1 count=4096 of=kbooti.tmp
-cat kbooti.tmp ipl_0x8001.bin > kbootidmp.tmp
+cat kbooti.tmp ipl_0x8001.bin.tmp > kbootidmp.tmp
 if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
 /usr/local/sony/bin/bootdispi/dstdb -nokbd -Force bloadp kbootidmp.tmp
 elif [ -f /usr/local/sony/bin/bootdispi/dsbloadp ]; then
@@ -113,8 +119,9 @@ fi
 
 #2.7.1
 if [ -f kbooti_271.bin ]; then
+cat 0xBFE01100r.bin 0x8001.bin > ipl_0x8001.bin.tmp
 dd if=kbooti_271.bin bs=1 count=4096 of=kbooti.tmp
-cat kbooti.tmp ipl_0x8001.bin > kbootidmp.tmp
+cat kbooti.tmp ipl_0x8001.bin.tmp > kbootidmp.tmp
 if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
 /usr/local/sony/bin/bootdispi/dstdb -nokbd -Force bloadp kbootidmp.tmp
 elif [ -f /usr/local/sony/bin/bootdispi/dsbloadp ]; then

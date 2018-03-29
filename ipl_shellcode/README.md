@@ -1,6 +1,6 @@
 BUILD INSTRUCTIONS: 
 
-Modify main.S
+main.S
 
 For 0.6.0 and below kbooti: 
 

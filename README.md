@@ -35,3 +35,14 @@ copy respective kbooti/bootdispi from the SDK in the folder containing the scrip
 run the kbooti_dump.sh script.
 
 Dumps will be named Lib-PSP iplloader*
+
+
+COMPILATION INSTRUCTIONS: 
+
+* Build dump_cp_addr using the tooolchain available below: 
+
+https://playstationhax.xyz/forums/topic/1191-release-cp_toolchain-by-flatz/
+
+* Build the 0xbfc00000 and 0xa0010000 shellcodes
+
+* Copy the build dump_cp_addr.elf, the 0x8001.bin and 0xbfc.bin shellcodes as well as the 0xBFE01100r.bin and jr_0xbfe01100.bin IPL blocks at the same location.
