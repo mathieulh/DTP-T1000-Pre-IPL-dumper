@@ -39,7 +39,7 @@ Dumps will be named Lib-PSP iplloader*
 
 COMPILATION INSTRUCTIONS: 
 
-* Build dump_cp_addr using the tooolchain available below: 
+* Build dump_cp_addr using the toolchain available below: 
 
 https://playstationhax.xyz/forums/topic/1191-release-cp_toolchain-by-flatz/
 
