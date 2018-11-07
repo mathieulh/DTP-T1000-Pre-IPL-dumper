@@ -36,10 +36,11 @@ run the kbooti_dump.sh script.
 
 Dumps will be named Lib-PSP iplloader*
 
+OPTIONAL: You can supply your own retail psp bootrom named pre-ipl.bin, should you do so, the dumper will rebuild the whole Lib-PSP iplloader binary including the loader part.
 
 COMPILATION INSTRUCTIONS: 
 
-* Build dump_cp_addr using the toolchain available below: 
+* Build dump_cp_addr and dump_cp_add_devarg using the toolchain available below: 
 
 https://playstationhax.xyz/forums/topic/1191-release-cp_toolchain-by-flatz/
 

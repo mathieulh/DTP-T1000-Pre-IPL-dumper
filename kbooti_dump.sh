@@ -34,7 +34,7 @@ sleep 10
 #tachyon crashes and does not return a proper reset value so dspreset is stuck in a waiting loop, thus we kill dspreset manually
 pkill dspreset
 #read address 0x1D650000 where our payload has written the dump. (0xBFE50000 on tachyon)
-./dump_cp_addr.elf 0x1D650000 0x1000 > "Lib-PSP iplloader0.4.0.bin.tmp"
+./dump_cp_addr_devarg.elf /dev/mem 0x1D650000 0x1000 > "Lib-PSP iplloader0.4.0.bin.tmp"
 #create the final file after removing the excess memory data from the dump
 dd if="Lib-PSP iplloader0.4.0.bin.tmp" bs=1 count=1472 of="Lib-PSP iplloader0.4.0.bin"
 #delete all temporary files
@@ -55,7 +55,7 @@ fi
 nohup /usr/local/sony/bin/bootdispi/dspreset &>/dev/null &
 sleep 10
 pkill dspreset
-./dump_cp_addr.elf 0x1D650000 0x1000 > "Lib-PSP iplloader0.6.0.bin.tmp"
+./dump_cp_addr_devarg.elf /dev/mem 0x1D650000 0x1000 > "Lib-PSP iplloader0.6.0.bin.tmp"
 dd if="Lib-PSP iplloader0.6.0.bin.tmp" bs=1 count=1872 of="Lib-PSP iplloader0.6.0.bin"
 rm -f *.tmp
 fi
@@ -74,8 +74,14 @@ fi
 nohup /usr/local/sony/bin/bootdispi/dspreset &>/dev/null &
 sleep 10
 pkill dspreset
-./dump_cp_addr.elf 0x1D650000 0x1000 > "Lib-PSP iplloader0.7.0_0x80010000.bin.tmp"
+./dump_cp_addr_devarg.elf /dev/mem 0x1D650000 0x1000 > "Lib-PSP iplloader0.7.0_0x80010000.bin.tmp"
 dd if="Lib-PSP iplloader0.7.0_0x80010000.bin.tmp" bs=1 count=2196 of="Lib-PSP iplloader0.7.0_0x80010000.bin"
+if [ -f pre-ipl.bin ]; then
+dd if=pre-ipl.bin bs=1 count=52 of="Lib-PSP iplloader_full.bin.1.tmp"
+echo -ne "\\x94\\x08" >> "Lib-PSP iplloader_full.bin.1.tmp"
+dd if=pre-ipl.bin bs=1 skip=54 count=586 of="Lib-PSP iplloader_full.bin.2.tmp"
+cat "Lib-PSP iplloader_full.bin.1.tmp" "Lib-PSP iplloader_full.bin.2.tmp" "Lib-PSP iplloader0.7.0_0x80010000.bin" > "Lib-PSP iplloader_0.7.0.bin"
+fi
 rm -f *.tmp #deletes all temporary files
 fi
 
@@ -93,8 +99,14 @@ fi
 nohup /usr/local/sony/bin/bootdispi/dspreset &>/dev/null &
 sleep 10
 pkill dspreset
-./dump_cp_addr.elf 0x1D650000 0x1000 > "Lib-PSP iplloader0.9.0_0x80010000.bin.tmp"
+./dump_cp_addr_devarg.elf /dev/mem 0x1D650000 0x1000 > "Lib-PSP iplloader0.9.0_0x80010000.bin.tmp"
 dd if="Lib-PSP iplloader0.9.0_0x80010000.bin.tmp" bs=1 count=2196 of="Lib-PSP iplloader0.9.0_0x80010000.bin"
+if [ -f pre-ipl.bin ]; then
+dd if=pre-ipl.bin bs=1 count=52 of="Lib-PSP iplloader_full.bin.1.tmp"
+echo -ne "\\x94\\x08" >> "Lib-PSP iplloader_full.bin.1.tmp"
+dd if=pre-ipl.bin bs=1 skip=54 count=586 of="Lib-PSP iplloader_full.bin.2.tmp"
+cat "Lib-PSP iplloader_full.bin.1.tmp" "Lib-PSP iplloader_full.bin.2.tmp" "Lib-PSP iplloader0.9.0_0x80010000.bin" > "Lib-PSP iplloader_0.9.0.bin"
+fi
 rm -f *.tmp
 fi
 
@@ -112,8 +124,14 @@ fi
 nohup /usr/local/sony/bin/bootdispi/dspreset &>/dev/null &
 sleep 10
 pkill dspreset
-./dump_cp_addr.elf 0x1D650000 0x1000 > "Lib-PSP iplloader2.6.0_0x80010000.bin.tmp"
+./dump_cp_addr_devarg.elf /dev/mem 0x1D650000 0x1000 > "Lib-PSP iplloader2.6.0_0x80010000.bin.tmp"
 dd if="Lib-PSP iplloader2.6.0_0x80010000.bin.tmp" bs=1 count=3060 of="Lib-PSP iplloader2.6.0_0x80010000.bin"
+if [ -f pre-ipl.bin ]; then
+dd if=pre-ipl.bin bs=1 count=52 of="Lib-PSP iplloader_full.bin.1.tmp"
+echo -ne "\\xf4\\x0b" >> "Lib-PSP iplloader_full.bin.1.tmp"
+dd if=pre-ipl.bin bs=1 skip=54 count=586 of="Lib-PSP iplloader_full.bin.2.tmp"
+cat "Lib-PSP iplloader_full.bin.1.tmp" "Lib-PSP iplloader_full.bin.2.tmp" "Lib-PSP iplloader2.6.0_0x80010000.bin" > "Lib-PSP iplloader_2.6.0.bin"
+fi
 rm -f *.tmp
 fi
 
@@ -131,8 +149,14 @@ fi
 nohup /usr/local/sony/bin/bootdispi/dspreset &>/dev/null &
 sleep 10
 pkill dspreset
-./dump_cp_addr.elf 0x1D650000 0x1000 > "Lib-PSP iplloader2.7.1_0x80010000.bin.tmp"
+./dump_cp_addr_devarg.elf /dev/mem 0x1D650000 0x1000 > "Lib-PSP iplloader2.7.1_0x80010000.bin.tmp"
 dd if="Lib-PSP iplloader2.7.1_0x80010000.bin.tmp" bs=1 count=3060 of="Lib-PSP iplloader2.7.1_0x80010000.bin"
+if [ -f pre-ipl.bin ]; then
+dd if=pre-ipl.bin bs=1 count=52 of="Lib-PSP iplloader_full.bin.1.tmp"
+echo -ne "\\xf4\\x0b" >> "Lib-PSP iplloader_full.bin.1.tmp"
+dd if=pre-ipl.bin bs=1 skip=54 count=586 of="Lib-PSP iplloader_full.bin.2.tmp"
+cat "Lib-PSP iplloader_full.bin.1.tmp" "Lib-PSP iplloader_full.bin.2.tmp" "Lib-PSP iplloader2.7.1_0x80010000.bin" > "Lib-PSP iplloader_2.7.1.bin"
+fi
 rm -f *.tmp
 fi
 
