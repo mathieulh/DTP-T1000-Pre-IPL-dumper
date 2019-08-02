@@ -3,7 +3,13 @@ DTP-T1000 Pre-IPL dumper
 This tool allows to dump Lib-PSP iplloader's loader segment (or full binary on 0.4 and 0.6) using kbooti/bootdispi files as input
 Check the wiki page below for more information:
 
-https://playstationdev.wiki/pspdevwiki/index.php?title=PRE-IPL
+https://playstationdev.wiki/pspdevwiki/index.php?title=PRE-IPL (the page has been taken down, a previous version of it is backupped is here: https://web.archive.org/web/20180906001636/https://www.pspdevwiki.com/wiki/PRE-IPL and here: https://drive.google.com/open?id=1ZIVlyj0bX5Twj-eUAwdkvIXZAUOcEjnvFGrGUZAawio
+
+
+If you wonder what a DTP-T1000 is and what development SKUs are available, a backup of the old SKU model page is available here: 
+
+https://web.archive.org/web/20180903223627/https://www.pspdevwiki.com/wiki/SKU_Models and here: 
+https://drive.google.com/open?id=19a7AZMWZ4IZ99fJYEwT3uJHZnAB4VPdgiAD3_MT60YE
 
 Requirements: 
 
