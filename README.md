@@ -83,4 +83,4 @@ https://playstationhax.xyz/forums/topic/1191-release-cp_toolchain-by-flatz/
 
 * Build the 0xbfc00000 and 0xa0010000 shellcodes
 
-* Copy the build dump_cp_addr.elf, the 0x8001.bin and 0xbfc.bin shellcodes as well as the 0xBFE01100v2.bin and jr_0xbfe01100.bin IPL blocks at the same location.
+* Copy the build dump_cp_addr.elf, the 0x8001.bin and 0xbfc.bin shellcodes as well as the 0xBFE01100v2.bin, 0xBFE01100v2_350.bin and jr_0xbfe01100.bin IPL blocks at the same location.
