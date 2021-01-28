@@ -178,7 +178,7 @@ pkill dspreset
 dd if="Lib-PSP iplloader3.5.0_0x80010000.bin.tmp" bs=1 count=3188 of="Lib-PSP iplloader3.5.0_0x80010000.bin"
 if [ -f pre-ipl.bin ]; then
 dd if=pre-ipl.bin bs=1 count=52 of="Lib-PSP iplloader_full.bin.1.tmp"
-echo -ne "\\xf4\\x0b" >> "Lib-PSP iplloader_full.bin.1.tmp"
+echo -ne "\\x74\\x0c" >> "Lib-PSP iplloader_full.bin.1.tmp"
 dd if=pre-ipl.bin bs=1 skip=54 count=586 of="Lib-PSP iplloader_full.bin.2.tmp"
 cat "Lib-PSP iplloader_full.bin.1.tmp" "Lib-PSP iplloader_full.bin.2.tmp" "Lib-PSP iplloader3.5.0_0x80010000.bin" > "Lib-PSP iplloader_3.5.0.bin"
 fi
