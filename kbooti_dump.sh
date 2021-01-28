@@ -160,4 +160,29 @@ fi
 rm -f *.tmp
 fi
 
+#3.5.0
+if [ -f kbooti_350.bin ]; then
+cat 0xbfe01100v2_350.bin 0x8001.bin > ipl_0x8001.bin.tmp
+dd if=kbooti_350.bin bs=1 count=4096 of=kbooti.tmp
+cat kbooti.tmp ipl_0x8001.bin.tmp > kbootidmp.tmp
+if [ -f /usr/local/sony/bin/bootdispi/dstdb ]; then
+/usr/local/sony/bin/bootdispi/dstdb -nokbd -Force bloadp kbootidmp.tmp
+elif [ -f /usr/local/sony/bin/bootdispi/dsbloadp ]; then
+/usr/local/sony/bin/bootdispi/dsbloadp kbootidmp.tmp
+else echo "Unsupported CP Version!"
+fi
+nohup /usr/local/sony/bin/bootdispi/dspreset &>/dev/null &
+sleep 10
+pkill dspreset
+./dump_cp_addr_devarg.elf /dev/mem 0x1D650000 0x1000 > "Lib-PSP iplloader3.5.0_0x80010000.bin.tmp"
+dd if="Lib-PSP iplloader3.5.0_0x80010000.bin.tmp" bs=1 count=3188 of="Lib-PSP iplloader3.5.0_0x80010000.bin"
+if [ -f pre-ipl.bin ]; then
+dd if=pre-ipl.bin bs=1 count=52 of="Lib-PSP iplloader_full.bin.1.tmp"
+echo -ne "\\xf4\\x0b" >> "Lib-PSP iplloader_full.bin.1.tmp"
+dd if=pre-ipl.bin bs=1 skip=54 count=586 of="Lib-PSP iplloader_full.bin.2.tmp"
+cat "Lib-PSP iplloader_full.bin.1.tmp" "Lib-PSP iplloader_full.bin.2.tmp" "Lib-PSP iplloader3.5.0_0x80010000.bin" > "Lib-PSP iplloader_3.5.0.bin"
+fi
+rm -f *.tmp
+fi
+
 rm -f *.tmp
