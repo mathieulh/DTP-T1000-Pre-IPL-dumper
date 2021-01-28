@@ -56,21 +56,14 @@ SHA-256: F9160C03EC6174F54F1C1EB645CFBBDB65B3DA47DA1A5478BE30E5EB2B0852B4 (Decry
 
 "kbooti_350.bin" (for SDK 3.5.0+)
 
-SHA-256: 75055FB49708E428D969F9E7545C27622EDF4A2335EEF10B8DC28534AB1B2B32 (Full decrypted binary without xor key)
-
-SHA-256: 0F9B33F693704F21AAF481CEBF6FCEBE68E6637E1CB243E2316F3D580DCB4362 (Decrypted payload without xor key)
 
 SHA-256: 8D8F88ECAB477E49DBC38E54B643324685AD29AF781A402EA8D681B3E14898B0 (Full decrypted binary with xor key)
 
 SHA-256: 3DF08013502E7D69CECDF0AC1BE561C44C7C3AE94ECFDCCAB2E87EED4F5D71E7 (Decrypted payload with xor key)
 
 
-Note: This will only dump the 3.5.0 Lib-PSP iplloader without the xor key (because it is wiped by the kbooti code during execution)
-if you need to add it ot your dump, it is meant to be located at 0xB0C in the full binary and 0x88C in the payload so you can just retrieve it and paste it back.
-
-An automated process to retrieve the xor key from Lib-PSP iplloader code execution (using an undisclosed Lib-PSP iplloader exploit) may be added in a future version of this tool.
-
-The XOR key is also available in ipl_blocks/3.5.0_xorkey.bin from this repository.
+Note: This will dump the 3.5.0 Lib-PSP iplloader with the XOR key. (key is only wiped in JIG mode)
+the XOR key is meant to be located at 0xB0C in the full binary and 0x88C in the payload so you can just retrieve it and paste it back.
 
 
 run the kbooti_dump.sh script.
