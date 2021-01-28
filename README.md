@@ -62,7 +62,7 @@ SHA-256: AAF6F3CF0D7E028F43BE6FB788018F7A6F49B140A2591937B5C3A8373D2186A5 (Full 
 SHA-256: 5066E257EC43DA37788535C331E5A01955F5F498B103C340903409649BCB5046 (Decrypted payload with xor key)
 
 
-Note: This will dump the 3.5.0 Lib-PSP iplloader with the XOR key. (key is only wiped in JIG mode)
+Note: This will dump the 3.5.0 Lib-PSP iplloader with the XOR key. (key is only wiped from uncached memory in JIG mode)
 the XOR key is meant to be located at 0xB0C in the full binary and 0x88C in the payload so you can just retrieve it and paste it back.
 
 
