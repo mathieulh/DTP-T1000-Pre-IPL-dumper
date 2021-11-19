@@ -5,7 +5,7 @@ Check the wiki page below for more information:
 
 https://playstationdev.wiki/pspdevwiki/index.php?title=PRE-IPL
 
-If you wonder what a DTP-T1000 is and what development SKUs are available,an overview is available here: https://playstationdev.wiki/pspdevwiki/index.php?title=SKU_Models
+If you wonder what a DTP-T1000 is and what development SKUs are available, an overview is available here: https://playstationdev.wiki/pspdevwiki/index.php?title=SKU_Models
 
 Requirements: 
 
