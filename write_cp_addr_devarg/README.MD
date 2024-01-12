@@ -1,4 +1,4 @@
-usage: a.out <fromfile> <todevice> <address>
+usage: "a.out <fromfile> <todevice> <address>"
 
 Build using
 
