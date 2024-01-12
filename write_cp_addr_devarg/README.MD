@@ -1,3 +1,5 @@
+Use this to write from file to arbitrary memory locations on the Commmunication Processor.
+
 usage: write_cp_addr_devarg.elf file device address
 
 Build using
