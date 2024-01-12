@@ -1,6 +1,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sys/mman.h> /* mmap() is defined in this header */
+#include <sys/mman.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -32,7 +32,7 @@ int main (int argc, char *argv[])
    }
 
  /* open/create the output file */
- if ((fdout = open (argv[2], O_RDWR | O_CREAT | O_TRUNC, mode )) < 0)//edited here
+ if ((fdout = open (argv[2], O_RDWR | O_CREAT | O_TRUNC, mode )) < 0)
    {printf ("can't create %s for writing", argv[2]);
     return 0;
    }
