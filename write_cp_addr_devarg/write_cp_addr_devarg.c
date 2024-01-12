@@ -73,4 +73,4 @@ int main (int argc, char *argv[])
  memcpy (dst, src, statbuf.st_size);
  return 0;
 
-} /* main */ 
+}
