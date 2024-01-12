@@ -1,4 +1,4 @@
-usage: "a.out <fromfile> <todevice> <address>"
+usage: write_cp_addr_devarg.elf file device address
 
 Build using
 
